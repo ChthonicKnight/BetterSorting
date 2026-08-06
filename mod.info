@@ -1,8 +1,8 @@
-description=v2.0.4 - Complete overhaul to item categories and various name tweaks.
-modversion=2.0.4
+description=v2.1.0 - Complete overhaul to item categories and various name tweaks.
+modversion=2.1.0
 id=BetterSortCC
 name=Better Sorting
-authors=ChobitsCrazy
+authors=ChthonicKnight
 poster=poster.png
 icon=mini-poster.png
-url=http://github.com/ChobitsCrazy/BetterSorting
+url=https://github.com/ChthonicKnight/BetterSorting
