@@ -1,12 +1,16 @@
-local function newCat(items, category)
-    for _, itemName in ipairs(items) do
-        local item = ScriptManager.instance:getItem(itemName)
-        item:DoParam("DisplayCategory", category)
-    end
+function BSnewCat(items, category)
+	for _, itemName in ipairs(items) do
+		local item = ScriptManager.instance:getItem(itemName)
+		if item then
+			item:DoParam("DisplayCategory", category)
+		else
+			print("[Better Sorting] Missing item: " .. tostring(itemName))
+		end
+	end
 end
 
-local cats = {
-	{
+BScats = BScats or {}
+table.insert(BScats, {
 	category = "AppearC",
 	items = {
 		"Base.MakeUp_CamoFullFace1",
@@ -43,11 +47,11 @@ local cats = {
 		"Base.MakeupFoundation",
 		"Base.HairDyeCommon",
 		"Base.HairDyeUncommon",
-		"Base.HairDyeRare"
-		}
+		"Base.HairDyeRare",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "Build",
 	items = {
 		"Base.Gravelbag",
@@ -87,11 +91,11 @@ local cats = {
 		"Base.ClayBrick",
 		"Base.ClayTile",
 		"Base.Bellows",
-		"Base.Stone2"
-		}
+		"Base.Stone2",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "BuildP",
 	items = {
 		"Base.PaintBlack",
@@ -108,11 +112,11 @@ local cats = {
 		"Base.PaintRed",
 		"Base.PaintTurquoise",
 		"Base.PaintWhite",
-		"Base.PaintYellow"
-		}
+		"Base.PaintYellow",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "Clean",
 	items = {
 		"Base.Soap2",
@@ -125,11 +129,11 @@ local cats = {
 		"Base.DishClothWet",
 		"Base.Broom",
 		"Base.Broom_Twig",
-		"Base.Mop"
-		}
+		"Base.Mop",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothAcc",
 	items = {
 		"Base.WristWatch_Right_ClassicBlack",
@@ -240,11 +244,11 @@ local cats = {
 		"Base.GasmaskFilter",
 		"Base.GasmaskFilterCrafted",
 		"Base.RespiratorFilters",
-		"Base.RespiratorFiltersRecharged"
-		}
+		"Base.RespiratorFiltersRecharged",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothArm",
 	items = {
 		"Base.Gloves_FingerlessGloves",
@@ -345,11 +349,11 @@ local cats = {
 		"Base.Shoulderpad_MetalScrap_R",
 		"Base.Shoulderpad_MetalSpikeScrap_L",
 		"Base.Shoulderpad_MetalSpikeScrap_R",
-		"Base.Gloves_MetalScrapArmour"
-		}
+		"Base.Gloves_MetalScrapArmour",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothBack",
 	items = {
 		"Base.Bag_GolfBag",
@@ -414,11 +418,11 @@ local cats = {
 		"Base.Bag_TarpFramepack_Small",
 		"Base.Bag_TarpFramepack_Large",
 		"Base.Bag_HydrationBackpack",
-		"Base.Bag_HydrationBackpack_Camo"
-		}
+		"Base.Bag_HydrationBackpack_Camo",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothBag",
 	items = {
 		"Base.Bag_FannyPackFront",
@@ -439,11 +443,11 @@ local cats = {
 		"Base.Bag_FannyPackFront_Tarp",
 		"Base.Bag_FannyPackBack_Tarp",
 		"Base.Bag_HideSatchel",
-		"Base.Bag_Satchel"
-		}
+		"Base.Bag_Satchel",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothBody",
 	items = {
 		"Base.Dress_Knees",
@@ -765,11 +769,11 @@ local cats = {
 		"Base.Vest_SheepSkin",
 		"Base.Cuirass_Metal",
 		"Base.Cuirass_CoatOfPlates",
-		"Base.Cuirass_MetalScrap"
-		}
+		"Base.Cuirass_MetalScrap",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothFeet",
 	items = {
 		"Base.Socks_Ankle",
@@ -812,11 +816,11 @@ local cats = {
 		"Base.Shoes_RagWrap",
 		"Base.Shoes_TarpWrap",
 		"Base.Shoes_TireSandals",
-		"Base.Shoes_Twine"
-		}
+		"Base.Shoes_Twine",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothHead",
 	items = {
 		"Base.Hat_BunnyEarsBlack",
@@ -1063,11 +1067,11 @@ local cats = {
 		"Base.Hat_HockeyMask_Silver",
 		"Base.Hat_MetalHelmet",
 		"Base.Hat_HockeyMask_MetalScrap",
-		"Base.Hat_MetalScrapHelmet"
-		}
+		"Base.Hat_MetalScrapHelmet",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothJew",
 	items = {
 		"Base.Locket",
@@ -1183,11 +1187,11 @@ local cats = {
 		"Base.Necklace_BoarTusk",
 		"Base.Necklace_BoarTusk_Multi",
 		"Base.Earring_BirdSkull",
-		"Base.Earring_BoarTusk"
-		}
+		"Base.Earring_BoarTusk",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothLeg",
 	items = {
 		"Base.Skirt_Knees_DeerHide",
@@ -1424,11 +1428,11 @@ local cats = {
 		"Base.GreaveScrap_Left",
 		"Base.GreaveScrap_Right",
 		"Base.GreaveSpikeScrap_Left",
-		"Base.GreaveSpikeScrap_Right"
-		}
+		"Base.GreaveSpikeScrap_Right",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ClothUnder",
 	items = {
 		"Base.Bra_Strapless_Black",
@@ -1483,11 +1487,11 @@ local cats = {
 		"Base.Briefs_Tarp",
 		"Base.Bra_Strapless_Hide",
 		"Base.Bra_Straps_Hide",
-		"Base.Underpants_Hide"
-		}
+		"Base.Underpants_Hide",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "Collect",
 	items = {
 		"Base.BorisBadger",
@@ -1507,11 +1511,11 @@ local cats = {
 		"Base.Emerald",
 		"Base.Ruby",
 		"Base.Sapphire",
-		"Base.Amethyst"
-		}
+		"Base.Amethyst",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ContB",
 	items = {
 		"Base.Wallet",
@@ -1577,11 +1581,11 @@ local cats = {
 		"Base.KeyRing_Forged",
 		"Base.KeyRing_Forged_Gold",
 		"Base.KeyRing_Forged_Silver",
-		"Base.Wallet_Hide"
-		}
+		"Base.Wallet_Hide",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ContH",
 	items = {
 		"Base.Plasticbag",
@@ -1666,14 +1670,14 @@ local cats = {
 		"Base.FirstAidKit_Military",
 		"Base.Cooler_Seafood",
 		"Base.Bag_HideSack",
-		"Base.Bag_TarpSack"
-		}
+		"Base.Bag_TarpSack",
 	},
+})
 
-
-	{
+table.insert(BScats, {
 	category = "ContL",
 	items = {
+		"Base.Milk",
 		"Base.Milk_Personalsized",
 		"Base.MilkChocolate_Personalsized",
 		"Base.WineBox",
@@ -1742,11 +1746,35 @@ local cats = {
 		"Base.CopperCup",
 		"Base.GoldCup",
 		"Base.SilverCup",
-		"Base.BucketLargeWood"
-		}
+		"Base.BucketLargeWood",
+		"Base.BeerBottle",
+		"Base.BeerCan",
+		"Base.BeerImported",
+		"Base.Brandy",
+		"Base.Champagne",
+		"Base.Cider",
+		"Base.CoffeeLiquer",
+		"Base.Curacao",
+		"Base.Gin",
+		"Base.Grenadine",
+		"Base.Port",
+		"Base.Rum",
+		"Base.Scotch",
+		"Base.Sherry",
+		"Base.Tequila",
+		"Base.Vermouth",
+		"Base.Vodka",
+		"Base.Whiskey",
+		"Base.Wine",
+		"Base.Wine2",
+		"Base.WineOpen",
+		"Base.Wine2Open",
+		"Base.WineAged",
+		"Base.WineScrewtop",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ContS",
 	items = {
 		"Base.Bag_ProtectiveCase",
@@ -1815,26 +1843,43 @@ local cats = {
 		"Base.HollowBook_Prison",
 		"Base.HollowBook_Valuables",
 		"Base.HollowBook_Whiskey",
-		"Base.Bag_ProtectiveCaseSmall_KeyCutting"
-		}
+		"Base.Bag_ProtectiveCaseSmall_KeyCutting",
 	},
+})
 
-	{
-	category = "CookBrew",
+table.insert(BScats, {
+	category = "CookBev",
 	items = {
 		"Base.RosePetalsDried",
-		"Base.Lavender",
 		"Base.LavenderPetalsDried",
-		"Base.Chamomile",
 		"Base.ChamomileDried",
-		"Base.Marigold",
 		"Base.MarigoldDried",
-		"Base.MintHerb",
-		"Base.MintHerbDried"
-		}
+		"Base.MintHerbDried",
+		"Base.AnimalMilkPowder",
+		"Base.WaterPurificationTablets",
+		"Base.Coffee2",
+		"Base.Teabag2",
 	},
+})
 
-	{
+table.insert(BScats, {
+	category = "CookBevP",
+	items = {
+		"Base.FourLeafClover",
+		"Base.Lavender",
+		"Base.Chamomile",
+		"Base.Marigold",
+		"Base.MintHerb",
+		"Base.Roses",
+		"Base.Dandelions",
+		"Base.Nettles",
+		"Base.Rosehips",
+		"Base.Thistle",
+		"Base.Violets",
+	},
+})
+
+table.insert(BScats, {
 	category = "CookImp",
 	items = {
 		"Base.Spork",
@@ -1884,11 +1929,11 @@ local cats = {
 		"Base.Kettle",
 		"Base.Kettle_Copper",
 		"Base.ClayMug",
-		"Base.CeramicTeacup"
-		}
+		"Base.CeramicTeacup",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "CookIng",
 	items = {
 		"Base.Yeast",
@@ -1917,31 +1962,110 @@ local cats = {
 		"Base.Soysauce",
 		"Base.Pepper",
 		"Base.Salt",
-		"Base.Basil",
 		"Base.BasilDried",
-		"Base.Chives",
 		"Base.ChivesDried",
-		"Base.Cilantro",
 		"Base.CilantroDried",
 		"Base.Cinnamon",
-		"Base.GingerRoot",
-		"Base.Oregano",
 		"Base.OreganoDried",
-		"Base.Parsley",
 		"Base.ParsleyDried",
-		"Base.Rosemary",
 		"Base.RosemaryDried",
-		"Base.Sage",
 		"Base.SageDried",
-		"Base.Thyme",
 		"Base.ThymeDried",
 		"Base.Capers",
 		"Base.CakeBatter",
-		"Base.PieDough"
-		}
+		"Base.PieDough",
+		"Base.BarleySheafDried",
+		"Base.RyeSheafDried",
+		"Base.WheatSheafDried",
+		"Base.cheese_powdered",
+		"Base.Butter",
+		"Base.Macaroni",
+		"Base.Pasta",
+		"Base.Rice",
+		"Base.Cornflour2",
+		"Base.Cornmeal2",
+		"Base.Flour2",
+		"Base.Hotsauce",
+		"Base.Ketchup",
+		"Base.Lard",
+		"Base.Margarine",
+		"Base.Mustard",
+		"Base.TomatoPaste",
+		"Base.PepperHabaneroDried",
+		"Base.PepperJalapenoDried",
+		"Base.BarleySheaf",
+		"Base.RyeSheaf",
+		"Base.BarleySeed",
+		"Base.RyeSeed",
+		"Base.CornSeed",
+		"Base.WheatSeed",
 	},
+})
 
-	{
+table.insert(BScats, {
+	category = "CookIngP",
+	items = {
+		"Base.Basil",
+		"Base.Chives",
+		"Base.Cilantro",
+		"Base.GingerRoot",
+		"Base.Oregano",
+		"Base.Parsley",
+		"Base.Rosemary",
+		"Base.Sage",
+		"Base.Thyme",
+		"Base.MayonnaiseFull",
+		"Base.RemouladeFull",
+		"Base.SeedPaste",
+		"Base.SeedPasteBowl",
+		"Base.SugarBeetPulpPot",
+		"Base.SugarBeetSyrupPot",
+		"Base.BaguetteDough",
+		"Base.BakingTray_Muffin",
+		"Base.BakingTray_Muffin_Recipe",
+		"Base.BreadDough",
+		"Base.Muffintray_Biscuit",
+		"Base.PiePrep",
+		"Base.PieWholeRaw",
+		"Base.PieWholeRawSweet",
+		"Base.Ramen",
+		"Base.PastaPan",
+		"Base.PastaPanCopper",
+		"Base.PastaPot",
+		"Base.PastaPotForged",
+		"Base.PizzaRecipe",
+		"Base.RicePan",
+		"Base.RicePanCopper",
+		"Base.RicePot",
+		"Base.RicePotForged",
+		"Base.PancakesCraft",
+		"Base.WaterPotPasta",
+		"Base.WaterPotForgedPasta",
+		"Base.WaterPotRice",
+		"Base.WaterPotForgedRice",
+		"Base.WaterSaucepanPasta",
+		"Base.WaterSaucepanPastaCopper",
+		"Base.WaterSaucepanRice",
+		"Base.WaterSaucepanRiceCopper",
+		"Base.PepperHabanero",
+		"Base.PepperJalapeno",
+		"Base.FishRoeSac",
+		"Base.CannedRoe",
+		"Base.GriddlePanFriedVegetables",
+		"Base.PanFriedVegetables",
+		"Base.PanFriedVegetables2",
+		"Base.PizzaWhole",
+		"Base.PotOfSoup",
+		"Base.PotOfSoupRecipe",
+		"Base.PotForgedSoupRecipe",
+		"Base.PotOfStew",
+		"Base.PotForgedStew",
+		"Base.BucketOfSoup",
+		"Base.BucketOfStew",
+	},
+})
+
+table.insert(BScats, {
 	category = "CraftBlack",
 	items = {
 		"Base.Malachite",
@@ -2039,11 +2163,11 @@ local cats = {
 		"Base.CeramicCrucible_Iron",
 		"Base.CeramicCrucible_Steel",
 		"Base.CeramicCrucibleSmall_Iron",
-		"Base.CeramicCrucibleSmall_Steel"
-		}
+		"Base.CeramicCrucibleSmall_Steel",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "CraftCarv",
 	items = {
 		"Base.Cow_Skull",
@@ -2071,11 +2195,11 @@ local cats = {
 		"Base.PigTusk",
 		"Base.AnimalBone",
 		"Base.JawboneBovide",
-		"Base.LargeAnimalBone"
-		}
+		"Base.LargeAnimalBone",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "CraftG",
 	items = {
 		"Base.Plank",
@@ -2257,11 +2381,11 @@ local cats = {
 		"Base.Coldpack",
 		"Base.ColdpackBox",
 		"Base.SteelWool",
-		"Base.GunPowder"
-		}
+		"Base.GunPowder",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "CraftMas",
 	items = {
 		"Base.FlatStone",
@@ -2284,11 +2408,11 @@ local cats = {
 		"Base.ClayTileUnfired",
 		"Base.WoodenBrickMold",
 		"Base.WoodenShingleMold",
-		"Base.WoodenTileMold"
-		}
+		"Base.WoodenTileMold",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "CraftTailor",
 	items = {
 		"Base.FabricRoll_Cotton",
@@ -2426,11 +2550,11 @@ local cats = {
 		"Base.Needle_Bone",
 		"Base.Needle_Brass",
 		"Base.Needle_Forged",
-		"Base.Yarn"
-		}
+		"Base.Yarn",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "Drugs",
 	items = {
 		"Base.CigarettePack",
@@ -2447,11 +2571,11 @@ local cats = {
 		"Base.TobaccoDried",
 		"Base.SmokingPipe",
 		"Base.CigaretteCarton",
-		"Base.CanPipe"
-		}
+		"Base.CanPipe",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ElecC",
 	items = {
 		"Base.Amplifier",
@@ -2467,11 +2591,11 @@ local cats = {
 		"Base.RemoteCraftedV3",
 		"Base.TimerCrafted",
 		"Base.TriggerCrafted",
-		"Base.Battery"
-		}
+		"Base.Battery",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ElecI",
 	items = {
 		"Base.Timer",
@@ -2506,11 +2630,11 @@ local cats = {
 		"Base.RadioRed",
 		"Base.TvAntique",
 		"Base.TvBlack",
-		"Base.TvWideScreen"
-		}
+		"Base.TvWideScreen",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ElecJ",
 	items = {
 		"Base.CordlessPhone",
@@ -2527,11 +2651,11 @@ local cats = {
 		"Base.Camera",
 		"Base.CameraDisposable",
 		"Base.CameraExpensive",
-		"Base.HairDryer"
-		}
+		"Base.HairDryer",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ElecL",
 	items = {
 		"Base.LightBulb",
@@ -2544,49 +2668,23 @@ local cats = {
 		"Base.LightBulbPink",
 		"Base.LightBulbPurple",
 		"Base.LightBulbRed",
-		"Base.LightBulbYellow"
-		}
+		"Base.LightBulbYellow",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FoodA",
 	items = {
-		"Base.BeerBottle",
-		"Base.BeerCan",
-		"Base.BeerImported",
-		"Base.Brandy",
-		"Base.Champagne",
-		"Base.Cider",
-		"Base.CoffeeLiquer",
-		"Base.Curacao",
-		"Base.Gin",
-		"Base.Grenadine",
-		"Base.Port",
-		"Base.Rum",
-		"Base.Scotch",
-		"Base.Sherry",
-		"Base.Tequila",
-		"Base.Vermouth",
-		"Base.Vodka",
-		"Base.Whiskey",
-		"Base.Wine",
-		"Base.Wine2",
-		"Base.WineOpen",
-		"Base.Wine2Open",
-		"Base.WineAged",
-		"Base.WineScrewtop",
 		"Base.BeerPack",
 		"Base.BeerCanPack",
 		"Base.WineWhite_Boxed",
-		"Base.WineRed_Boxed"
-		}
+		"Base.WineRed_Boxed",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FoodB",
 	items = {
-		"Base.AnimalMilkPowder",
-		"Base.WaterPurificationTablets",
 		"Base.HotDrinkTea",
 		"Base.HotDrinkTeaCeramic",
 		"Base.HotDrink",
@@ -2601,16 +2699,13 @@ local cats = {
 		"Base.HotDrinkTumbler",
 		"Base.WaterRationCan_Box",
 		"Base.WaterRationCan_Open",
-		"Base.CannedFruitBeverage_Box"
-		}
+		"Base.CannedFruitBeverage_Box",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FoodN",
 	items = {
-		"Base.BarleySheafDried",
-		"Base.RyeSheafDried",
-		"Base.WheatSheafDried",
 		"Base.SugarBeetSugarPot",
 		"Base.CrispyRiceSquare",
 		"Base.CookieChocolateChip",
@@ -2634,7 +2729,6 @@ local cats = {
 		"Base.Chocolate_SnikSnak",
 		"Base.Gingerbreadman",
 		"Base.ScoutCookies",
-		"Base.cheese_powdered",
 		"Base.WaterRationCan",
 		"Base.MysteryCan",
 		"Base.DentedCan",
@@ -2656,26 +2750,17 @@ local cats = {
 		"Base.TinnedBeans",
 		"Base.TinnedSoup",
 		"Base.TunaTin",
-		"Base.Butter",
 		"Base.CannedFruitBeverage",
 		"Base.Cereal",
-		"Base.Coffee2",
-		"Base.Teabag2",
 		"Base.DriedBlackBeans",
 		"Base.DriedChickpeas",
 		"Base.DriedKidneyBeans",
 		"Base.DriedLentils",
 		"Base.DriedSplitPeas",
 		"Base.DriedWhiteBeans",
-		"Base.Macaroni",
-		"Base.Pasta",
-		"Base.Rice",
 		"Base.BouillonCube",
 		"Base.ChocolateChips",
 		"Base.CocoaPowder",
-		"Base.Cornflour2",
-		"Base.Cornmeal2",
-		"Base.Flour2",
 		"Base.GrahamCrackers",
 		"Base.RicePaper",
 		"Base.Seaweed",
@@ -2683,9 +2768,6 @@ local cats = {
 		"Base.SugarBrown",
 		"Base.SugarCubes",
 		"Base.SugarPacket",
-		"Base.BlackSageDried",
-		"Base.CommonMallowDried",
-		"Base.WildGarlicDried",
 		"Base.DriedApricots",
 		"Base.Allsorts",
 		"Base.Candycane",
@@ -2728,20 +2810,12 @@ local cats = {
 		"Base.SnoGlobes",
 		"Base.QuaggaCakes",
 		"Base.Honey",
-		"Base.Hotsauce",
 		"Base.JamFruit",
 		"Base.JamMarmalade",
-		"Base.Ketchup",
-		"Base.Lard",
 		"Base.MapleSyrup",
-		"Base.Margarine",
 		"Base.Marinara",
-		"Base.Mustard",
 		"Base.PeanutButter",
-		"Base.TomatoPaste",
 		"Base.Olives",
-		"Base.PepperHabaneroDried",
-		"Base.PepperJalapenoDried",
 		"Base.Pickles",
 		"Base.MysteryCan_Box",
 		"Base.DentedCan_Box",
@@ -2764,11 +2838,11 @@ local cats = {
 		"Base.TinnedSoup_Box",
 		"Base.TunaTin_Box",
 		"Base.Macandcheese_Box",
-		"Base.Frog"
-		}
+		"Base.Frog",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FoodP",
 	items = {
 		"Base.PanFriedVegetablesForged",
@@ -2780,15 +2854,7 @@ local cats = {
 		"Base.Bacon",
 		"Base.BaconRashers",
 		"Base.BaconBits",
-		"Base.MayonnaiseFull",
-		"Base.RemouladeFull",
-		"Base.BarleySheaf",
-		"Base.RyeSheaf",
-		"Base.SeedPaste",
-		"Base.SeedPasteBowl",
 		"Base.WheatSheaf",
-		"Base.SugarBeetPulpPot",
-		"Base.SugarBeetSyrupPot",
 		"Base.TurkeyEgg",
 		"Base.CannedBellPepper",
 		"Base.CannedBroccoli",
@@ -2808,7 +2874,6 @@ local cats = {
 		"Base.CannedPotato_Open",
 		"Base.CannedRedRadish_Open",
 		"Base.CannedTomato_Open",
-		"Base.Roses",
 		"Base.Baguette",
 		"Base.Biscuit",
 		"Base.Bread",
@@ -2842,10 +2907,6 @@ local cats = {
 		"Base.PieKeyLime",
 		"Base.PieLemonMeringue",
 		"Base.PiePumpkin",
-		"Base.BaguetteDough",
-		"Base.BakingTray_Muffin",
-		"Base.BakingTray_Muffin_Recipe",
-		"Base.BreadDough",
 		"Base.CakePrep",
 		"Base.CakeRaw",
 		"Base.CookieChocolateChipDough",
@@ -2854,10 +2915,6 @@ local cats = {
 		"Base.CookiesShortbreadDough",
 		"Base.CookiesSugarDough",
 		"Base.Dough",
-		"Base.Muffintray_Biscuit",
-		"Base.PiePrep",
-		"Base.PieWholeRaw",
-		"Base.PieWholeRawSweet",
 		"Base.CandiedApple",
 		"Base.JellyRoll",
 		"Base.CannedBologneseOpen",
@@ -2886,7 +2943,6 @@ local cats = {
 		"Base.CerealBowl",
 		"Base.OatsRaw",
 		"Base.Macandcheese",
-		"Base.Ramen",
 		"Base.TVDinner",
 		"Base.Cone",
 		"Base.TacoShell",
@@ -2909,36 +2965,16 @@ local cats = {
 		"Base.BurritoRecipe",
 		"Base.FruitSalad",
 		"Base.FruitSaladClay",
-		"Base.GriddlePanFriedVegetables",
 		"Base.Oatmeal",
 		"Base.OmeletteRecipe",
 		"Base.OmeletteRecipeForged",
 		"Base.PancakesRecipe",
-		"Base.PanFriedVegetables",
-		"Base.PanFriedVegetables2",
-		"Base.PastaPan",
-		"Base.PastaPanCopper",
-		"Base.PastaPot",
-		"Base.PastaPotForged",
-		"Base.PizzaRecipe",
-		"Base.PizzaWhole",
-		"Base.PotOfSoup",
-		"Base.PotOfSoupRecipe",
-		"Base.PotForgedSoupRecipe",
-		"Base.PotOfStew",
-		"Base.PotForgedStew",
-		"Base.RicePan",
-		"Base.RicePanCopper",
-		"Base.RicePot",
-		"Base.RicePotForged",
 		"Base.Salad",
 		"Base.SaladClay",
 		"Base.Sandwich",
 		"Base.TacoRecipe",
 		"Base.Toast",
 		"Base.WafflesRecipe",
-		"Base.BucketOfSoup",
-		"Base.BucketOfStew",
 		"Base.Crayfish",
 		"Base.FishFillet",
 		"Base.FishRoe",
@@ -2948,8 +2984,6 @@ local cats = {
 		"Base.Shrimp",
 		"Base.Squid",
 		"Base.SquidCalamari",
-		"Base.Leech",
-		"Base.Tadpole",
 		"Base.LargemouthBass",
 		"Base.SmallmouthBass",
 		"Base.SpottedBass",
@@ -2973,20 +3007,9 @@ local cats = {
 		"Base.Mussels",
 		"Base.Acorn",
 		"Base.BeautyBerry",
-		"Base.Dandelions",
-		"Base.FourLeafClover",
 		"Base.GrapeLeaves",
 		"Base.HollyBerry",
-		"Base.LemonGrass",
-		"Base.Nettles",
-		"Base.Rosehips",
-		"Base.Thistle",
-		"Base.Violets",
 		"Base.WinterBerry",
-		"Base.BlackSage",
-		"Base.CommonMallow",
-		"Base.Ginseng",
-		"Base.WildGarlic2",
 		"Base.Apple",
 		"Base.Banana",
 		"Base.Cherry",
@@ -3083,7 +3106,6 @@ local cats = {
 		"Base.Waffles",
 		"Base.BeanBowl",
 		"Base.FriedOnionRingsCraft",
-		"Base.PancakesCraft",
 		"Base.PastaBowl",
 		"Base.PastaBowlClay",
 		"Base.RamenBowl",
@@ -3094,14 +3116,6 @@ local cats = {
 		"Base.SoupBowlClay",
 		"Base.StewBowl",
 		"Base.StewBowlClay",
-		"Base.WaterPotPasta",
-		"Base.WaterPotForgedPasta",
-		"Base.WaterPotRice",
-		"Base.WaterPotForgedRice",
-		"Base.WaterSaucepanPasta",
-		"Base.WaterSaucepanPastaCopper",
-		"Base.WaterSaucepanRice",
-		"Base.WaterSaucepanRiceCopper",
 		"Base.Frozen_ChickenNuggets",
 		"Base.Frozen_FishFingers",
 		"Base.Frozen_FrenchFries",
@@ -3155,8 +3169,6 @@ local cats = {
 		"Base.MixedVegetables",
 		"Base.Onion",
 		"Base.Peas",
-		"Base.PepperHabanero",
-		"Base.PepperJalapeno",
 		"Base.Pumpkin",
 		"Base.PumpkinSliced",
 		"Base.PumpkinSmashed",
@@ -3180,27 +3192,24 @@ local cats = {
 		"Base.Tofu",
 		"Base.RatKing",
 		"Base.FishGuts",
-		"Base.FishRoeSac",
-		"Base.CannedRoe",
 		"Base.CannedRoe_Open",
 		"Base.MysteryCan_Open",
 		"Base.DentedCan_Open",
-		"Base.Milk"
-		}
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "Fuel",
 	items = {
 		"Base.BBQStarterFluid",
 		"Base.LighterFluid",
 		"Base.Propane_Refill",
 		"Base.PropaneTank",
-		"Base.Oxygen_Tank"
-		}
+		"Base.Oxygen_Tank",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FurnA",
 	items = {
 		"Base.Mov_AntiqueStove",
@@ -3236,11 +3245,11 @@ local cats = {
 		"Base.Mov_Microwave",
 		"Base.Mov_Microwave2",
 		"Base.Mov_Toaster",
-		"Base.Mov_BrownDishwasher"
-		}
+		"Base.Mov_BrownDishwasher",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FurnD",
 	items = {
 		"Base.Cow_Skull_Wall",
@@ -3303,11 +3312,11 @@ local cats = {
 		"Base.Mov_PosterPiePink",
 		"Base.Mov_PosterPieRed",
 		"Base.Mov_HuntingTrophy",
-		"Base.Mov_MapUSA"
-		}
+		"Base.Mov_MapUSA",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FurnE",
 	items = {
 		"Base.Mov_SnackVendingMachine",
@@ -3359,11 +3368,11 @@ local cats = {
 		"Base.Mov_Lamp3",
 		"Base.Mov_Lamp4",
 		"Base.Mov_Lamp5",
-		"Base.Mov_Lamp6"
-		}
+		"Base.Mov_Lamp6",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FurnF",
 	items = {
 		"Base.Mov_BonsaiTree",
@@ -3376,11 +3385,11 @@ local cats = {
 		"Base.Mov_Ficus",
 		"Base.Mov_RaisedPlantbed",
 		"Base.Mov_SnakePlant",
-		"Base.Mov_VioletFlowers"
-		}
+		"Base.Mov_VioletFlowers",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FurnG",
 	items = {
 		"Base.Mov_ConcreteMixer",
@@ -3559,11 +3568,11 @@ local cats = {
 		"Base.Mov_WindowTiled",
 		"Base.Mov_WindowWhite",
 		"Base.Mov_WindowChrome",
-		"Base.Mov_WindowSlider"
-		}
+		"Base.Mov_WindowSlider",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "FurnP",
 	items = {
 		"Base.Mov_ChemicalToilet",
@@ -3578,11 +3587,11 @@ local cats = {
 		"Base.Mov_Urinal",
 		"Base.Mov_WallShower",
 		"Base.Mov_WhiteSink",
-		"Base.Mov_WhiteHangingSink"
-		}
+		"Base.Mov_WhiteHangingSink",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "LitC",
 	items = {
 		"Base.LouisvilleMap1",
@@ -3599,11 +3608,11 @@ local cats = {
 		"Base.RiversideMap",
 		"Base.RosewoodMap",
 		"Base.WestpointMap",
-		"Base.Map"
-		}
+		"Base.Map",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "LitE",
 	items = {
 		"Base.MagazineCrossword",
@@ -3788,11 +3797,11 @@ local cats = {
 		"Base.BookFancy_Religion",
 		"Base.PhotoBook",
 		"Base.ChildsPictureBook",
-		"Base.Photo_Hass"
-		}
+		"Base.Photo_Hass",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "LitR",
 	items = {
 		"Base.SmithingMag1",
@@ -3889,11 +3898,11 @@ local cats = {
 		"Base.SewingPattern",
 		"Base.RadioMag1",
 		"Base.RadioMag2",
-		"Base.RadioMag3"
-		}
+		"Base.RadioMag3",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "LitS",
 	items = {
 		"Base.BookCarpentry1",
@@ -4039,11 +4048,11 @@ local cats = {
 		"Base.BookButcheringSet",
 		"Base.BookTrackingSet",
 		"Base.BookLongBladeSet",
-		"Base.BookMaintenanceSet"
-		}
+		"Base.BookMaintenanceSet",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "LitW",
 	items = {
 		"Base.Journal",
@@ -4067,11 +4076,11 @@ local cats = {
 		"Base.PenFancy",
 		"Base.PenMultiColor",
 		"Base.PenSpiffo",
-		"Base.RedPen"
-		}
+		"Base.RedPen",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "Mech",
 	items = {
 		"Base.CarBattery1",
@@ -4172,11 +4181,11 @@ local cats = {
 		"Base.ModernCarMuffler3",
 		"Base.HoodOrnament_Badger",
 		"Base.HoodOrnament_Beaver",
-		"Base.HoodOrnament_Spiffo"
-		}
+		"Base.HoodOrnament_Spiffo",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "MedI",
 	items = {
 		"Base.Tissue",
@@ -4188,13 +4197,21 @@ local cats = {
 		"Base.SutureNeedleHolder",
 		"Base.Forceps_Forged",
 		"Base.Tweezers",
-		"Base.Tweezers_Forged"
-		}
+		"Base.Tweezers_Forged",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "MedM",
 	items = {
+		"Base.BlackSageDried",
+		"Base.CommonMallowDried",
+		"Base.WildGarlicDried",
+		"Base.LemonGrass",
+		"Base.BlackSage",
+		"Base.CommonMallow",
+		"Base.Ginseng",
+		"Base.WildGarlic2",
 		"Base.Pills",
 		"Base.PillsAntiDep",
 		"Base.PillsBeta",
@@ -4208,11 +4225,11 @@ local cats = {
 		"Base.AntibioticsBox",
 		"Base.ComfreyCataplasm",
 		"Base.PlantainCataplasm",
-		"Base.WildGarlicCataplasm"
-		}
+		"Base.WildGarlicCataplasm",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "MedT",
 	items = {
 		"Base.AlcoholedCottonBalls",
@@ -4228,26 +4245,26 @@ local cats = {
 		"Base.CottonBallsBox",
 		"Base.Disinfectant",
 		"Base.Splint",
-		"Base.RippedSheetsSterilizedBundle"
-		}
+		"Base.RippedSheetsSterilizedBundle",
 	},
+})
 
-	{
-	category = "MediaA",	
+table.insert(BScats, {
+	category = "MediaA",
 	items = {
-		"Base.Disc_Retail"
-		}
+		"Base.Disc_Retail",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "MediaV",
 	items = {
 		"Base.VHS_Retail",
-		"Base.VHS_Home"
-		}
+		"Base.VHS_Home",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "Misc",
 	items = {
 		"Base.RatPoison",
@@ -4270,27 +4287,17 @@ local cats = {
 		"Base.Pillow_Crafted",
 		"Base.Pillow_Happyface",
 		"Base.Pillow_Heart",
-		"Base.Pillow_Star"
-		}
+		"Base.Pillow_Star",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "MiscJ",
 	items = {
 		"Base.PaperNapkins2",
 		"Base.Staples",
 		"Base.Hops",
 		"Base.HopsDried",
-		"Base.Dung_Turkey",
-		"Base.Dung_Chicken",
-		"Base.Dung_Cow",
-		"Base.Dung_Deer",
-		"Base.Dung_Mouse",
-		"Base.Dung_Pig",
-		"Base.Dung_Rabbit",
-		"Base.Dung_Raccoon",
-		"Base.Dung_Rat",
-		"Base.Dung_Sheep",
 		"Base.Poppies",
 		"Base.BusinessCard",
 		"Base.BusinessCard_Personal",
@@ -4481,11 +4488,11 @@ local cats = {
 		"Base.CapGunCap",
 		"Base.Revolver_CapGun",
 		"Base.Rifle_CapGun",
-		"Base.SprayPaint"
-		}
+		"Base.SprayPaint",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "MiscK",
 	items = {
 		"Base.Key1",
@@ -4493,11 +4500,11 @@ local cats = {
 		"Base.CombinationPadlock",
 		"Base.KeyPadlock",
 		"Base.Padlock",
-		"Base.CarKey"
-		}
+		"Base.CarKey",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "SurCamp",
 	items = {
 		"Base.CampingTentKit2",
@@ -4540,13 +4547,23 @@ local cats = {
 		"Base.TentBlue_Packed",
 		"Base.TentBrown_Packed",
 		"Base.TentGreen_Packed",
-		"Base.Firewood"
-		}
+		"Base.Firewood",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "SurFarm",
 	items = {
+		"Base.Dung_Turkey",
+		"Base.Dung_Chicken",
+		"Base.Dung_Cow",
+		"Base.Dung_Deer",
+		"Base.Dung_Mouse",
+		"Base.Dung_Pig",
+		"Base.Dung_Rabbit",
+		"Base.Dung_Raccoon",
+		"Base.Dung_Rat",
+		"Base.Dung_Sheep",
 		"Base.KnapsackSprayer",
 		"Base.KnapsackSprayer_Stowed",
 		"Base.GardeningSprayMilk",
@@ -4568,13 +4585,9 @@ local cats = {
 		"Base.PoppySeed",
 		"Base.PoppyPods",
 		"Base.PoppyPodsDried",
-		"Base.BarleySeed",
 		"Base.PumpkinSeed",
-		"Base.RyeSeed",
-		"Base.CornSeed",
 		"Base.SoybeansSeed",
 		"Base.GreenpeasSeed",
-		"Base.WheatSeed",
 		"Base.CilantroSeed",
 		"Base.RoseBagSeed",
 		"Base.RoseBagSeed_Empty",
@@ -4733,13 +4746,15 @@ local cats = {
 		"Base.ParsleySeed",
 		"Base.RosemarySeed",
 		"Base.SageSeed",
-		"Base.ThymeSeed"
-		}
+		"Base.ThymeSeed",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "SurFish",
 	items = {
+		"Base.Leech",
+		"Base.Tadpole",
 		"Base.FishingLine",
 		"Base.PremiumFishingLine",
 		"Base.Chum",
@@ -4776,11 +4791,11 @@ local cats = {
 		"Base.FishingHook_Bone",
 		"Base.FishingHook_Forged",
 		"Base.CraftedFishingRod",
-		"Base.FishingRod"
-		}
+		"Base.FishingRod",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "SurTrap",
 	items = {
 		"Base.TrapBox",
@@ -4788,11 +4803,11 @@ local cats = {
 		"Base.TrapCrate",
 		"Base.TrapMouse",
 		"Base.TrapSnare",
-		"Base.TrapStick"
-		}
+		"Base.TrapStick",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ToolB",
 	items = {
 		"Base.PlasterTrowel",
@@ -4802,11 +4817,11 @@ local cats = {
 		"Base.PipeWrench",
 		"Base.Sledgehammer",
 		"Base.Sledgehammer2",
-		"Base.SledgehammerForged"
-		}
+		"Base.SledgehammerForged",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ToolC",
 	items = {
 		"Base.ScissorsBluntMedical",
@@ -4903,11 +4918,11 @@ local cats = {
 		"Base.SmallKnife",
 		"Base.SteakKnife",
 		"Base.StoneKnifeLong",
-		"Base.SwitchKnife"
-		}
+		"Base.SwitchKnife",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ToolF",
 	items = {
 		"Base.Lighter",
@@ -4916,11 +4931,11 @@ local cats = {
 		"Base.Matchbox",
 		"Base.LighterBBQ",
 		"Base.Matches",
-		"Base.Lighter_Battery"
-		}
+		"Base.Lighter_Battery",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ToolG",
 	items = {
 		"Base.Extinguisher",
@@ -4959,11 +4974,11 @@ local cats = {
 		"Base.ClosedUmbrellaTINTED",
 		"Base.ClosedUmbrellaWhite",
 		"Base.Multitool",
-		"Base.TinOpener_Old"
-		}
+		"Base.TinOpener_Old",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ToolH",
 	items = {
 		"Base.Scythe",
@@ -4985,11 +5000,11 @@ local cats = {
 		"Base.WoodAxe",
 		"Base.WoodAxeForged",
 		"Base.GardenFork",
-		"Base.GardenFork_Forged"
-		}
+		"Base.GardenFork_Forged",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ToolL",
 	items = {
 		"Base.HandTorch",
@@ -5012,21 +5027,21 @@ local cats = {
 		"Base.Flashlight_Crafted",
 		"Base.Candle",
 		"Base.CandleLit",
-		"Base.CandleBox"
-		}
+		"Base.CandleBox",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "ToolM",
 	items = {
 		"Base.Jack",
 		"Base.LugWrench",
 		"Base.TirePump",
-		"Base.CarBatteryCharger"
-		}
+		"Base.CarBatteryCharger",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "WepAmmo",
 	items = {
 		"Base.308Bullets",
@@ -5055,11 +5070,11 @@ local cats = {
 		"Base.Bullets9mmBox",
 		"Base.Bullets9mmCarton",
 		"Base.ShotgunShellsBox",
-		"Base.ShotgunShellsCarton"
-		}
+		"Base.ShotgunShellsCarton",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "WepAmmoMag",
 	items = {
 		"Base.44Clip",
@@ -5067,11 +5082,11 @@ local cats = {
 		"Base.556Clip",
 		"Base.9mmClip",
 		"Base.M14Clip",
-		"Base.JS14_Clip"
-		}
+		"Base.JS14_Clip",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "WepBomb",
 	items = {
 		"Base.Aerosolbomb",
@@ -5106,11 +5121,11 @@ local cats = {
 		"Base.SmokeBombTriggered",
 		"Base.Firecracker",
 		"Base.Firecracker_Crafted",
-		"Base.Molotov"
-		}
+		"Base.Molotov",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "WepFire",
 	items = {
 		"Base.AssaultRifle",
@@ -5132,11 +5147,11 @@ local cats = {
 		"Base.L92_Carbine",
 		"Base.L94_Rifle",
 		"Base.MSR7T_Rifle",
-		"Base.TrapperCarbine"
-		}
+		"Base.TrapperCarbine",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "WepMelee",
 	items = {
 		"Base.Scalpel",
@@ -5344,11 +5359,11 @@ local cats = {
 		"Base.RailroadSpikeKnife",
 		"Base.SmashedBottle",
 		"Base.Stake",
-		"Base.Toothbrush_Shiv"
-		}
+		"Base.Toothbrush_Shiv",
 	},
+})
 
-	{
+table.insert(BScats, {
 	category = "WepPart",
 	items = {
 		"Base.x2Scope",
@@ -5361,16 +5376,14 @@ local cats = {
 		"Base.RedDot",
 		"Base.GunLight",
 		"Base.ChokeTubeFull",
-		"Base.ChokeTubeImproved"
-		}
-	}
-}
+		"Base.ChokeTubeImproved",
+	},
+})
 
-local function boot()
-
-    for _, category in ipairs(cats) do
-        newCat(category.items, category.category)
-    end
+local function BSboot()
+	for _, category in ipairs(BScats) do
+		BSnewCat(category.items, category.category)
+	end
 end
 
-Events.OnGameBoot.Add(boot)
+Events.OnGameBoot.Add(BSboot)

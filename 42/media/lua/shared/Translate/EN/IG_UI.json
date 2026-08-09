@@ -19,9 +19,11 @@
 	"IGUI_ItemCat_ContH": "Container - Held",
 	"IGUI_ItemCat_ContL": "Container - Liquid",
 	"IGUI_ItemCat_ContS": "Container - Storage",
-	"IGUI_ItemCat_CookBrew": "Cooking - Brewing",
+	"IGUI_ItemCat_CookBev": "Cooking - Beverage",
+	"IGUI_ItemCat_CookBevP": "Cooking - Beverage Perishable",
 	"IGUI_ItemCat_CookImp": "Cooking - Implement",
 	"IGUI_ItemCat_CookIng": "Cooking - Ingredient",
+	"IGUI_ItemCat_CookIngP": "Cooking - Perishable Ingredient",
 	"IGUI_ItemCat_CraftAmmo": "Crafting - Ammunition",
 	"IGUI_ItemCat_CraftBlack": "Crafting - Blacksmithing",
 	"IGUI_ItemCat_CraftCarv": "Crafting - Carving",
@@ -78,5 +80,6 @@
 	"IGUI_ItemCat_WepMelee": "Weapon - Melee",
 	"IGUI_ItemCat_WepPart": "Weapon - Part",
 	"IGUI_ItemCat_WepRange": "Weapon - Ranged",
-	"IGUI_ItemCat_WepShield": "Weapon - Shield"
+	"IGUI_ItemCat_WepShield": "Weapon - Shield",
+	"IGUI_ItemCat_TEST": "Test Category"
 }
