@@ -3,6 +3,7 @@ modversion=2.1.1
 id=BetterSortCC
 name=Better Sorting
 author=ChthonicKnight
+category=qol
 poster=poster.png
 icon=mini-poster.png
 url=https://github.com/ChthonicKnight/BetterSorting
