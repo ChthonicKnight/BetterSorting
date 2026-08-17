@@ -24,6 +24,7 @@ function BSgetCategory(item)
 end
 
 function BSupdateItem(item)
+    if not item then return end
     item:setDisplayCategory(
         BSgetCategory(item) or item:getScriptItem():getDisplayCategory())
 end
