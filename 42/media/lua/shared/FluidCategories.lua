@@ -29,7 +29,7 @@ function BSupdateItem(item)
         BSgetCategory(item) or item:getScriptItem():getDisplayCategory())
 end
 
-function BSupdateContainer(container)
+function BSupdateFluids(container)
     local items = container:getAllEvalRecurse(function(item)
         return item:isFluidContainer()
     end)

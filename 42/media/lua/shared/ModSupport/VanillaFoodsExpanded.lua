@@ -2225,6 +2225,14 @@ table.insert(BSoverride, {
 })
 
 table.insert(BSoverride, {
+	category = "CookImp",
+	items = {
+		"Base.Cork",
+		"Base.Funnel",
+	},
+})
+
+table.insert(BSoverride, {
 	category = "CookIng",
 	items = {
 		"Base.BouillonCube",

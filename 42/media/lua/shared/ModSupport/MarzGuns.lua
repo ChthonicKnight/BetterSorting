@@ -54,7 +54,7 @@ table.insert(BScats, {
 })
 
 table.insert(BScats, {
-	category = "ToolG",
+	category = "CraftG",
 	items = {
         "MarzGuns.RepairPack",
     },

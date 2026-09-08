@@ -1,47 +1,53 @@
+BSitemCats = BSitemCats or {}
+
 function BSnewCat(items, category)
 	for _, itemName in ipairs(items) do
 		local item = ScriptManager.instance:getItem(itemName)
 		if item then
-			item:DoParam("DisplayCategory", category)
+			BSitemCats[itemName] = category
 		end
 	end
 end
 
 local ModCORE = require "ModSupport/ModCORE"
 local BSclothingSlots = ModCORE.clothing
-local BSmeleeCats = ModCORE.melee
+local BSnewMusic = require "ModSupport/NewMusicMods"
 local function BSdynamicCats()
 	local items = ScriptManager.instance:getAllItems()
+	local music = BSnewMusic()
 	for i = 0, items:size() - 1 do
 		local item = items:get(i)
+		local fullType = item:getFullName()
 		local baseCat = item:getDisplayCategory()
 		local slot = item:getBodyLocation()
 		if slot then slot = tostring(slot)
-		elseif baseCat == "Bag" then
-			local backpack = item:InstanceItem(nil)
-			if backpack then slot = tostring(backpack:canBeEquipped())
+		elseif item:isItemType(ItemType.CONTAINER) then
+			local container = item:InstanceItem(nil)
+			if container then slot = tostring(container:canBeEquipped())
 			end
 		end
 		local clothCat = BSclothingSlots[slot]
 		if baseCat == "ZedDmg" or baseCat == "Wound" or baseCat == "Bandage" then
-			item:DoParam("DisplayCategory", "TEST")
+			BSitemCats[fullType] = "TEST"
 		elseif clothCat then
-			item:DoParam("DisplayCategory", clothCat)
+			BSitemCats[fullType] = clothCat
 		elseif item:getLearnedRecipes() and item:getLearnedRecipes():size() > 0 and baseCat ~= "Gardening" then
-			item:DoParam("DisplayCategory", "LitR")
+			BSitemCats[fullType] = "LitR"
 		elseif baseCat == "VehicleMaintenance" then
-			item:DoParam("DisplayCategory", "Mech")
-		elseif baseCat == "Ammo" then
-		    local ammo = item:InstanceItem(nil)
-		    if ammo and ammo:getMaxAmmo() > 0 then item:DoParam("DisplayCategory", "WepAmmoMag")
-		    else item:DoParam("DisplayCategory", "WepAmmo")
-		    end
-		elseif baseCat == "WeaponPart" then
-			item:DoParam("DisplayCategory", "WepPart")
+			BSitemCats[fullType] = "Mech"
+		elseif baseCat == "Ammo" or baseCat == "WeaponPart" then
+    		local ammo = item:InstanceItem(nil)
+    		if ammo and ammo:getMaxAmmo() > 0 then
+				BSitemCats[fullType] = "WepAmmoMag"
+    		elseif baseCat == "Ammo" then
+				BSitemCats[fullType] = "WepAmmo"
+    		else
+				BSitemCats[fullType] = "WepPart"
+    		end
 		elseif baseCat and baseCat:contains("Weapon") and not baseCat:contains("Tool") then
 		    local weapon = item:InstanceItem(nil)
 		    if weapon and instanceof(weapon, "HandWeapon") then
-				if weapon:isRanged() then item:DoParam("DisplayCategory", "WepFire")
+				if weapon:isRanged() then BSitemCats[fullType] = "WepFire"
 				else 
 					local categories = item:getWeaponCategories()
 					local melee
@@ -52,11 +58,46 @@ local function BSdynamicCats()
 					elseif categories:contains(WeaponCategory.SMALL_BLADE) then melee = "WepMBladeS"
 					elseif categories:contains(WeaponCategory.SPEAR) then melee = "WepMSpear"
 					end
-					item:DoParam("DisplayCategory", melee or "WepMelee")
+					BSitemCats[fullType] = melee or "WepMelee"
 				end
 		    end
+		elseif baseCat == "Deck" or baseCat == "GameBoard" or baseCat == "GamePiece" or baseCat == "GameBox" or baseCat == "Die" then
+			BSitemCats[fullType] = "MediaG"
+		elseif baseCat == "Appearance" or baseCat == "MaleBody" then
+			BSitemCats[fullType] = "AppearC"
+		elseif music[fullType] then
+			BSitemCats[fullType] = "MediaA"
 		end
 	end
+end
+
+local BSskillMedia = {}
+local BSignoredCodes = {BOR = true, STS = true, FAT = true, PAN = true,}
+local function BSassMedia()
+    for id, recording in pairs(RecMedia) do
+        for _, line in ipairs(recording.lines or {}) do
+            for code in (line.codes or ""):gmatch("[^,]+") do
+                local skill = code:match("^%s*(%u%u%u)[%+%-]")
+                if code:find("RCP=", 1, true) or skill and not BSignoredCodes[skill] then
+                    BSskillMedia[id] = true
+                    break
+                end
+            end
+            if BSskillMedia[id] then break end
+        end
+    end
+end
+
+function BSupdateMedia(container)
+    local items = container:getAllEvalRecurse(function(item)
+        return item:getScriptItem():getRecordedMediaCat() == "Retail-VHS"
+    end)
+    for i = 0, items:size() - 1 do
+        local item = items:get(i)
+        local media = item:getMediaData()
+        if media then item:setDisplayCategory(BSskillMedia[media:getId()] and "MediaS" or "MediaV")
+        end
+    end
 end
 
 BScats = BScats or {}
@@ -3447,6 +3488,7 @@ table.insert(BScats, {
 table.insert(BScats, {
 	category = "FurnG",
 	items = {
+		"Base.Moveable",
 		"Base.Mov_ConcreteMixer",
 		"Base.Mov_UprightCoffin",
 		"Base.Mov_FlatCoffin",
@@ -4337,7 +4379,6 @@ table.insert(BScats, {
 		"Base.Dice_4",
 		"Base.Dice_6",
 		"Base.Dice_8",
-		"Base.TarotCardDeck",
 		"Base.Pillow",
 		"Base.Pillow_Crafted",
 		"Base.Pillow_Happyface",
@@ -4349,6 +4390,7 @@ table.insert(BScats, {
 table.insert(BScats, {
 	category = "MiscJ",
 	items = {
+		"Base.TarotCardDeck",
 		"Base.PaperNapkins2",
 		"Base.Staples",
 		"Base.Hops",
@@ -5032,15 +5074,7 @@ table.insert(BScats, {
 		"Base.ClosedUmbrellaWhite",
 		"Base.Multitool",
 		"Base.TinOpener_Old",
-		"Base.Axe_Old",
-		"Base.Axe",
-		"Base.HandAxe",
-		"Base.IceAxe",
-		"Base.PickAxe",
-		"Base.HandAxe_Old",
-		"Base.PickAxeForged",
 		"Base.SnowShovel",
-		"Base.HandAxeForged",
 	},
 })
 
@@ -5413,6 +5447,20 @@ table.insert(BScats, {
 --})
 
 table.insert(BScats, {
+	category = "WepMAxe",
+	items = {
+		"Base.Axe_Old",
+		"Base.Axe",
+		"Base.HandAxe",
+		"Base.IceAxe",
+		"Base.PickAxe",
+		"Base.HandAxe_Old",
+		"Base.PickAxeForged",
+		"Base.HandAxeForged",
+	},
+})
+
+table.insert(BScats, {
 	category = "WepMBluntL",
 	items = {
 		"Base.HobbyHorse",
@@ -5457,7 +5505,6 @@ table.insert(BScats, {
 		"Base.WaterDrop",
 		"Base.Animal",
 		"Base.M_Hair_Stubble",
-		"Base.Moveable",
 		"Base.CorpseMale",
 		"Base.HematiteLarge",
 		"Base.TestWaterMug",
@@ -5475,6 +5522,19 @@ table.insert(BScats, {
 	},
 })
 
+function BSupdateBase(container)
+    local items = container:getAllEvalRecurse(function(item)
+        return BSitemCats[item:getFullType()] ~= nil
+    end)
+    for i = 0, items:size() - 1 do
+        local item = items:get(i)
+        local category = BSitemCats[item:getFullType()]
+        if item:getDisplayCategory() ~= category then
+            item:setDisplayCategory(category)
+        end
+    end
+end
+
 local function BSboot()
 	BSdynamicCats()
 	for _, category in ipairs(BScats) do BSnewCat(category.items, category.category)
@@ -5484,4 +5544,5 @@ local function BSboot()
 end
 
 Events.OnGameBoot.Add(BSboot)
---local cats={TEST=true}; for _,entry in ipairs(BScats) do cats[entry.category]=true end; local items=ScriptManager.instance:getAllItems(); local count=0; for i=0,items:size()-1 do local item=items:get(i); local category=item:getDisplayCategory(); if not cats[category] then count=count+1; print("[BS UNASSIGNED] "..item:getFullName().." | category="..tostring(category).." | mod="..tostring(item:getModID())) end end; print("[BS UNASSIGNED] Total: "..count)
+Events.OnGameBoot.Add(BSassMedia)
+--local cats={TEST=true,ClothAcc=true,ClothArm=true,ClothBack=true,ClothBag=true,ClothBody=true,ClothFeet=true,ClothHead=true,ClothJew=true,ClothLeg=true,ClothMisc=true,ClothUnder=true,LitR=true,Mech=true,WepAmmo=true,WepAmmoMag=true,WepFire=true,WepMelee=true,WepMAxe=true,WepMBladeL=true,WepMBladeS=true,WepMBluntL=true,WepMBluntS=true,WepMSpear=true,WepPart=true}; for _,entry in ipairs(BScats) do cats[entry.category]=true end; local items=ScriptManager.instance:getAllItems(); local count=0; for i=0,items:size()-1 do local item=items:get(i); local category=item:getDisplayCategory(); if not cats[category] then local slot=item:getBodyLocation(); if slot then slot=tostring(slot) elseif item:isItemType(ItemType.CONTAINER) then local instance=item:InstanceItem(nil); if instance then slot=tostring(instance:canBeEquipped()) end end; count=count+1; print("[BS UNASSIGNED] "..item:getFullName().." | category="..tostring(category).." | slot="..tostring(slot).." | mod="..tostring(item:getModID())) end end; print("[BS UNASSIGNED] Total: "..count)
