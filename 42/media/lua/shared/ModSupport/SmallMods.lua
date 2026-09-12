@@ -1175,6 +1175,33 @@ table.insert(BScats, {
 })
 end
 
+if mod:contains("MonsterEnergy") then
+    table.insert(BScats, {
+        category = "FoodB",
+        items = {
+            "Base.MonsterCan",
+            "Base.MonsterUltraWhite",
+            "Base.MonsterUltraParadise",
+            "Base.MonsterUltraSunrise",
+            "Base.MonsterUltraViolet",
+            "Base.MonsterUltraRed",
+            "Base.MonsterUltraPeachyKeen",
+            "Base.MonsterPipelinePunch",
+            "Base.MonsterMangoLoco",
+            "Base.MonsterKhaotic",
+        },
+    })
+
+    table.insert(BSfluidCats, {
+        category = "FoodB",
+        fluids = {
+            "MonsterEnergy",
+            "MonsterUltra",
+            "MonsterJuice",
+        },
+    })
+end
+
 if mod:contains("testmod") then
 table.insert(BScats, {
     category = "TEST",
