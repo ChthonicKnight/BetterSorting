@@ -1,10 +1,8 @@
-BSitemCats = BSitemCats or {}
-
 function BSnewCat(items, category)
 	for _, itemName in ipairs(items) do
 		local item = ScriptManager.instance:getItem(itemName)
 		if item then
-			BSitemCats[itemName] = category
+			item:DoParam("DisplayCategory", category)
 		end
 	end
 end
@@ -28,26 +26,26 @@ local function BSdynamicCats()
 		end
 		local clothCat = BSclothingSlots[slot]
 		if baseCat == "ZedDmg" or baseCat == "Wound" or baseCat == "Bandage" then
-			BSitemCats[fullType] = "TEST"
+			item:DoParam("DisplayCategory", "TEST")
 		elseif clothCat then
-			BSitemCats[fullType] = clothCat
+			item:DoParam("DisplayCategory", clothCat)
 		elseif item:getLearnedRecipes() and item:getLearnedRecipes():size() > 0 and baseCat ~= "Gardening" then
-			BSitemCats[fullType] = "LitR"
+			item:DoParam("DisplayCategory", "LitR")
 		elseif baseCat == "VehicleMaintenance" then
-			BSitemCats[fullType] = "Mech"
+			item:DoParam("DisplayCategory", "Mech")
 		elseif baseCat == "Ammo" or baseCat == "WeaponPart" then
     		local ammo = item:InstanceItem(nil)
     		if ammo and ammo:getMaxAmmo() > 0 then
-				BSitemCats[fullType] = "WepAmmoMag"
+				item:DoParam("DisplayCategory", "WepAmmoMag")
     		elseif baseCat == "Ammo" then
-				BSitemCats[fullType] = "WepAmmo"
+				item:DoParam("DisplayCategory", "WepAmmo")
     		else
-				BSitemCats[fullType] = "WepPart"
+				item:DoParam("DisplayCategory", "WepPart")
     		end
 		elseif baseCat and baseCat:contains("Weapon") and not baseCat:contains("Tool") then
 		    local weapon = item:InstanceItem(nil)
 		    if weapon and instanceof(weapon, "HandWeapon") then
-				if weapon:isRanged() then BSitemCats[fullType] = "WepFire"
+				if weapon:isRanged() then item:DoParam("DisplayCategory", "WepFire")
 				else 
 					local categories = item:getWeaponCategories()
 					local melee
@@ -58,15 +56,15 @@ local function BSdynamicCats()
 					elseif categories:contains(WeaponCategory.SMALL_BLADE) then melee = "WepMBladeS"
 					elseif categories:contains(WeaponCategory.SPEAR) then melee = "WepMSpear"
 					end
-					BSitemCats[fullType] = melee or "WepMelee"
+					item:DoParam("DisplayCategory", melee or "WepMelee")
 				end
 		    end
 		elseif baseCat == "Deck" or baseCat == "GameBoard" or baseCat == "GamePiece" or baseCat == "GameBox" or baseCat == "Die" then
-			BSitemCats[fullType] = "MediaG"
+			item:DoParam("DisplayCategory", "MediaG")
 		elseif baseCat == "Appearance" or baseCat == "MaleBody" then
-			BSitemCats[fullType] = "AppearC"
+			item:DoParam("DisplayCategory", "AppearC")
 		elseif music[fullType] then
-			BSitemCats[fullType] = "MediaA"
+			item:DoParam("DisplayCategory", "MediaA")
 		end
 	end
 end
@@ -5521,19 +5519,6 @@ table.insert(BScats, {
 		"Base.F_Hair_Stubble",
 	},
 })
-
-function BSupdateBase(container)
-    local items = container:getAllEvalRecurse(function(item)
-        return BSitemCats[item:getFullType()] ~= nil
-    end)
-    for i = 0, items:size() - 1 do
-        local item = items:get(i)
-        local category = BSitemCats[item:getFullType()]
-        if item:getDisplayCategory() ~= category then
-            item:setDisplayCategory(category)
-        end
-    end
-end
 
 local function BSboot()
 	BSdynamicCats()
